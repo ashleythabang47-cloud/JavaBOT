@@ -1,0 +1,23 @@
+package com.example.chatbot.controller;
+
+import com.example.chatbot.model.ChatMessage;
+import com.example.chatbot.service.ChatbotService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/chat")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+public class ChatHistoryController {
+
+    private final ChatbotService chatbotService;
+
+    @GetMapping("/history/{sessionId}")
+    public ResponseEntity<List<ChatMessage>> getHistory(@PathVariable String sessionId) {
+        return ResponseEntity.ok(chatbotService.getHistory(sessionId));
+    }
+}
